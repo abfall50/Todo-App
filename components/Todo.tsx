@@ -2,7 +2,10 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Circle from "./Circle";
 import Cross from "../public/icon-cross.svg";
-import { useAppDispatch } from "../features/hooks";
+import { useAppDispatch, useAppSelector } from "../features/hooks";
+import { DragEventHandler, useEffect, useState } from "react";
+import { selectFilteredTodos, TodosState } from "../features/todos/todosSlice";
+import { FilterState } from "../features/filter/filterSlice";
 
 interface Todo {
   id: string;
@@ -19,21 +22,33 @@ const Todo: NextPage<TodoProps> = (props) => {
 
   const dispatch = useAppDispatch();
 
+  /**
+   * When the user clicks the button, dispatch an action to remove the todo.
+   */
   const removeTodo = () => {
     dispatch({ type: "todos/removeTodo", payload: todo.id });
   };
 
+  /**
+   * When the user clicks the checkbox, dispatch an action to the Redux store that toggles the
+   * completed status of the todo.
+   */
   const toggleCompleted = () => {
     dispatch({ type: "todos/toggleCompleted", payload: todo.id });
   };
 
   return (
     <>
-      <div className="w-full h-1/6 border-b border-[#4D5066] flex" draggable="true" >
-        <button className="w-5/6 h-full flex group" onClick={toggleCompleted}>
+      <div
+        id={todo.id}
+        className="w-full h-1/6 border-b border-todo-border flex "
+      >
+        <button
+          className="w-5/6 h-full flex lg:w-[90%] group"
+          onClick={toggleCompleted}
+        >
           <div className="w-1/6 h-full flex justify-center items-center">
             <Circle
-              color={todo.isCompleted ? undefined : "4D5066"}
               gradient={
                 todo.isCompleted
                   ? {
@@ -43,16 +58,24 @@ const Todo: NextPage<TodoProps> = (props) => {
                     }
                   : undefined
               }
+              isInBox={true}
             />
           </div>
-          <div className="w-4/6 h-full flex items-center overflow-hidden">
-            <span className="text-white text-md font-['Josephin_Sans'] truncate">
+          <div className="w-4/6 h-full flex items-center overflow-hidden pl-1">
+            <span
+              className={
+                "text-md font-['Josephin_Sans'] truncate " +
+                (todo.isCompleted
+                  ? "line-through text-[#4D5066]"
+                  : "text-text-color")
+              }
+            >
               {todo.description}
             </span>
           </div>
         </button>
         <button
-          className="w-1/6 h-full flex justify-center items-center"
+          className="w-1/6 h-full flex justify-center items-center lg:w-[10%] lg:hidden lg:group-hover:block"
           onClick={removeTodo}
         >
           <Image src={Cross} alt="Cross" />

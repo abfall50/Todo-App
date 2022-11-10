@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	--background: #161722;
+	--bg-box: #34364C;
+
+	--text-color: #FFF;
+	--text-color-footer: #4D5066;
+
+	--hover-text-footer1: #E4E5F1;
+	--hover-text-footer2: #CACDE8;
+
+	--mobile-bg: url('../public/bg-mobile-dark.jpg');
+	--desktop-bg: url('../public/bg-desktop-dark.jpg');
+
+	--placeholder: #4D5066;
+
+	--circle-outline: #4D5066;
+	--todo-border: #4D5066;
+
+	--footer: #4D5066;
+}
+
+[data-theme="dark"] {
+	--background: #161722;
+	--bg-box: #34364C;
+
+	--text-color: #FFF;
+	--text-color-footer: #4D5066;
+
+	--hover-text-footer1: #E4E5F1;
+	--hover-text-footer2: #CACDE8;
+
+	--mobile-bg: url('../public/bg-mobile-dark.jpg');
+	--desktop-bg: url('../public/bg-desktop-dark.jpg');
+
+	--placeholder: #4D5066;
+
+	--circle-outline: #4D5066;
+	--todo-border: #4D5066;
+
+	--footer: #4D5066;
+}
+
+[data-theme="light"] {
+	--background: #FAFAFA;
+	--bg-box: #FAFAFA;
+
+	--text-color: #484B6A;
+	--text-color-footer: #9394A5;
+
+	--hover-text-footer1: #484B6A;
+	--hover-text-footer2: #484B6A;
+
+	--mobile-bg: url('../public/bg-mobile-light.jpg');
+	--desktop-bg: url('../public/bg-desktop-light.jpg');
+
+	--placeholder: #9394A5;
+
+	--circle-outline: #D2D3DB;
+	--todo-border: #E4E5F1;
+
+	--footer: #9394A5;
+}

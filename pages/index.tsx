@@ -1,10 +1,15 @@
 import Head from "next/head";
+import { useCallback, useEffect, useState } from "react";
+import Background from "../components/Background";
 import Box from "../components/Box";
 import FilterFooter from "../components/FilterFooter";
 import Header from "../components/Header";
 import InputBar from "../components/InputBar";
+import { useMediaQuery } from "../features/hooks";
 
 export default function Home() {
+  let breakpoint = useMediaQuery(1024);
+
   return (
     <div className="w-screen h-screen">
       <Head>
@@ -13,22 +18,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <div className="w-full h-1/3 bg-[#161722] border-2 border-red-500"></div>
-      <div className="w-full h-2/3 bg-[#161722] border-2 border-blue-600"></div>
+      <Background />
 
-      <div className="w-full h-full absolute top-0 flex justify-center items-center">
-        <div className="w-[85%] h-[90%] flex flex-col">
+      <main className="w-full h-full absolute top-0 flex justify-center items-center">
+        <div className="w-[85%] h-[85%] flex flex-col md:w-3/5 lg:w-2/5">
           <Header />
           <InputBar />
           <Box />
-          <FilterFooter />
-          <div className="w-full h-[8%] flex justify-center items-center">
-            <span className="w-full h-full text-md font-['Josephin_Sans'] text-center text-[#4D5066]">
-              Drag and drop to reorder list
-            </span>
-          </div>
+          {breakpoint ? <FilterFooter /> : ""}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

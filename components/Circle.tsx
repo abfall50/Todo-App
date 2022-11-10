@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Image from "next/image";
-import Check from '../public/icon-check.svg'
+import Check from "../public/icon-check.svg";
 
 type Gradient = {
   direction: string;
@@ -9,25 +9,33 @@ type Gradient = {
 };
 
 type CircleProps = {
-  color?: string;
   gradient?: Gradient;
+  isInBox: boolean;
 };
 
 const Circle: NextPage<CircleProps> = (props) => {
-  const { color, gradient } = props;
+  const { gradient, isInBox } = props;
 
   return (
     <div
       className={
-        "w-6 h-6 border-2 rounded-full flex justify-center items-center " +
-        (color ? `border-[#${color}] ` : "") +
-        (gradient
-          ? `bg-${gradient.direction} from-[#${gradient.from}] to-[#${gradient.to}] border-0 `
-          : "bg-[#34364C] ")
+        "w-6 h-6 rounded-full bg-circle-outline p-px " +
+        (isInBox &&
+          !gradient &&
+          "lg:group-hover:bg-gradient-to-br from-[#57DDFF] to-[#C058F3]")
       }
     >
-		{gradient && <Image src={Check} alt="Check" />}
-	</div>
+      <div
+        className={
+          "w-full h-full rounded-full flex justify-center items-center " +
+          (gradient
+            ? "bg-gradient-to-br from-[#57DDFF] to-[#C058F3]"
+            : "bg-box")
+        }
+      >
+        {gradient && <Image src={Check} alt="Check" />}
+      </div>
+    </div>
   );
 };
 

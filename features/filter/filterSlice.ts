@@ -7,6 +7,7 @@ export type FilterState = {
 
 const initialState: FilterState = { filter: "All" };
 
+/* Creating a slice of the state. */
 const filterSlice = createSlice({
   name: "filter",
   initialState,
@@ -23,6 +24,11 @@ const filterSlice = createSlice({
   },
 });
 
+/**
+ * It takes the state object as an argument and returns the filter property of the filterReducer object
+ * @param state - { todosReducer: TodosState, filterReducer: FilterState }
+ * @returns The filter state
+ */
 export const selectFilterState = (state: { todosReducer: TodosState, filterReducer: FilterState }) => {
 	return state.filterReducer.filter
 };

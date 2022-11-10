@@ -1,16 +1,16 @@
-import { useAppSelector } from "../features/hooks";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useAppDispatch, useAppSelector } from "../features/hooks";
 import { selectFilteredTodos } from "../features/todos/todosSlice";
 import ClearFooter from "./ClearFooter";
 import Todo from "./Todo";
 
 const Box = () => {
-
   const allTodos = useAppSelector(selectFilteredTodos)
 
   return (
     <>
-      <div className="w-full h-[80%] flex justify-center items-start pt-8">
-        <div className="w-full h-full bg-[#34364C] flex flex-col rounded-md">
+      <section className="w-full h-[80%] flex justify-center items-start pt-8 lg:h-full">
+        <div className="w-full h-full bg-box flex flex-col rounded-md shadow-xl">
           <div className="w-full h-[87%] overflow-auto">
             {allTodos.map((todo, index) => {
               return (
@@ -21,7 +21,7 @@ const Box = () => {
           </div>
           <ClearFooter />
         </div>
-      </div>
+      </section>
     </>
   );
 };
